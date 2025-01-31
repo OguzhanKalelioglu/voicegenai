@@ -25,9 +25,7 @@
       }
     ],
     "extraMetadata": {
-      "env": {
-        "OPENAI_API_KEY": ""
-      }
+     
     }, 
     "directories": {
       "buildResources": "build"
