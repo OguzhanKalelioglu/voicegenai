@@ -64,9 +64,12 @@ playPauseButton.addEventListener('click', async () => {
 // `read-clipboard` olayını dinleyin
 window.api.onReadClipboard((clipboardText) => {
   if (!clipboardText) return;
+
+  // Clipboard metnini input alanına yaz
+  const textInput = document.getElementById('text-input');
   textInput.value = clipboardText;
-  console.log("Clipboard metni:", clipboardText);
-  
+
   // Otomatik oynatmak istersen:
-  playPauseButton.click();
+  const playButton = document.getElementById('play-pause-button');
+  playButton.click();
 });

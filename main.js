@@ -20,7 +20,11 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: app.isPackaged
+        ? path.join(process.resourcesPath, 'preload.js')  // Build sonrası
+        : path.join(__dirname, 'preload.js'),            // Geliştirme modu
+      sandbox: true,
+      nodeIntegration: false,
       contextIsolation: true,
       enableRemoteModule: false
     }
@@ -29,7 +33,11 @@ function createWindow() {
 }
 
 function createTray() {
-  const iconPath = path.join(__dirname, 'electron-icon.png');
+  const iconPath = path.join(
+    __dirname, // Geliştirme ve build ortamı için uyumlu yol
+    app.isPackaged ? 'build/icons/win/trayIcon.png' : 'electron-icon.png'
+  );
+  
   tray = new Tray(iconPath);
 
   const contextMenu = Menu.buildFromTemplate([
@@ -75,30 +83,60 @@ function bringWindowToFront() {
 }
 
 function registerGlobalShortcut() {
-  // Mac'te Cmd + Shift + S, Windows/Linux'ta Ctrl + Shift + S olarak tanımlanır
+  // Önceki kısayolları temizle (güvenlik için)
+  if (app.isPackaged && !process.env.DEBUG) {
+    globalShortcut.unregisterAll();
+    console.log('Önceki kısayollar temizlendi.');
+  }
+
+  // Kısayol tuş kombinasyonu (Mac'te Cmd + Shift + S, Windows/Linux'ta Ctrl + Shift + S)
   const shortcutKey = 'CommandOrControl+Shift+S';
 
-  const registered = globalShortcut.register(shortcutKey, () => {
-    // Pencereyi öne getir
-    bringWindowToFront();
+  try {
+    // Kısayolu kaydet
+    const registered = globalShortcut.register(shortcutKey, () => {
+      // Pencereyi öne getir
+      if (mainWindow) {
+        bringWindowToFront();
 
-    // Clipboard'daki metni al, boş değilse renderer.js'e gönder
-    const text = clipboard.readText().trim();
-    if (text) {
-      mainWindow.webContents.send('read-clipboard', text);
+        // Clipboard'daki metni oku
+        const text = clipboard.readText().trim();
+
+        // Eğer metin varsa, renderer process'e gönder
+        if (text) {
+          mainWindow.webContents.send('read-clipboard', text);
+          console.log('Clipboard metni gönderildi:', text);
+        } else {
+          console.log('Clipboard boş veya metin yok.');
+        }
+      } else {
+        console.error('MainWindow tanımlı değil!');
+      }
+    });
+
+    // Kısayol başarıyla kaydedildi mi kontrol et
+    if (!registered) {
+      const errorMessage = `Kısayol kaydı başarısız: ${shortcutKey}. Başka bir uygulama bu kısayolu kullanıyor olabilir.`;
+      console.error(errorMessage);
+
+      // Renderer process'e hata mesajı gönder
+      if (mainWindow) {
+        mainWindow.webContents.send('app-error', errorMessage);
+      }
     } else {
-      console.log('Clipboard boş veya metin yok');
-    }
-  });
+      console.log(`Kısayol başarıyla kaydedildi: ${shortcutKey}`);
 
-  if (!registered) {
-    console.log(`Kısayol kaydı başarısız: ${shortcutKey}`);
-  } else {
-    console.log(`Kısayol aktif: ${shortcutKey}`);
-    // Kayıt kontrolü (isteğe bağlı)
-    console.log('isRegistered:',
-      globalShortcut.isRegistered(shortcutKey)
-    );
+      // Kısayolun kaydedildiğini kontrol et (isteğe bağlı)
+      console.log('Kısayol kayıtlı mı?', globalShortcut.isRegistered(shortcutKey));
+    }
+  } catch (error) {
+    // Hata durumunda logla ve renderer process'e bildir
+    const errorMessage = `Kısayol kaydı sırasında hata: ${error.message}`;
+    console.error(errorMessage);
+
+    if (mainWindow) {
+      mainWindow.webContents.send('app-error', errorMessage);
+    }
   }
 }
 
