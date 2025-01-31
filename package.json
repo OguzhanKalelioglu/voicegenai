@@ -26,9 +26,9 @@
     ],
     "extraMetadata": {
       "env": {
-        "OPENAI_API_KEY": "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"
+        "OPENAI_API_KEY": ""
       }
-    },
+    }, 
     "directories": {
       "buildResources": "build"
     },
