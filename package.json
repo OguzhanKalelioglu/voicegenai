@@ -1,15 +1,43 @@
 {
-  "name": "text-to-speech-app",
+  "name": "voicegenai",
   "version": "1.0.0",
+  "description": "A text-to-speech application powered by AI",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.oguzhankalelioglu.voicegenai",  
+    "productName": "VoiceGenAI",
+    "files": [
+      "main.js",
+      "index.html",
+      "trayIcon.png",
+      "preload.js",
+      "renderer.js",
+      "package.json",
+      "assets/**/*"
+    ],
+    "directories": {
+      "buildResources": "build"             
+    },
+    "win": {
+      "target": "nsis",                     
+      "icon": "build/icons/win/trayIcon.png" 
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icons/mac/trayIcon.icns" 
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icons/png"              
+    }
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "description": "",
+  "author": "Oğuzhan Kalelioğlu",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^34.0.2",
     "electron-builder": "^25.1.8"
