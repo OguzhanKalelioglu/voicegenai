@@ -1,6 +1,6 @@
 # VoiceGenAI
 
-![VoiceGenAI Logo](./build/icons/png/trayIcon.png)
+![VoiceGenAI Logo](./banner.jpg)
 
 **VoiceGenAI** is a cutting-edge Text-to-Speech (TTS) application powered by Artificial Intelligence. Built with Electron, VoiceGenAI seamlessly converts written text into natural-sounding speech, enhancing accessibility and productivity across various platforms.
 
