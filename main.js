@@ -21,12 +21,12 @@ function createWindow() {
     height: 600,
     webPreferences: {
       preload: app.isPackaged
-        ? path.join(process.resourcesPath, 'preload.js')  // Build sonrası
-        : path.join(__dirname, 'preload.js'),            // Geliştirme modu
+      ? path.join(process.resourcesPath, 'preload.js')  // Build sonrası
+      : path.join(__dirname, 'preload.js'),            // Geliştirme modu
       sandbox: true,
       nodeIntegration: false,
       contextIsolation: true,
-      enableRemoteModule: false
+      enableRemoteModule: false,
     }
   });
   mainWindow.loadFile('index.html');

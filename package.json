@@ -24,17 +24,19 @@
         "to": "./"
       }
     ],
-    "extraMetadata": {
-     
-    }, 
     "directories": {
       "buildResources": "build"
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icons/win/trayIcon.png"
+      "icon": "build/icons/win/trayIcon.png",
+      "requestedExecutionLevel": "highestAvailable"
     },
     "mac": {
+      "target": "dmg",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.plist",
       "category": "public.app-category.utilities",
       "icon": "build/icons/mac/trayIcon.icns"
     },
