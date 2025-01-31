@@ -16,6 +16,8 @@
     - [Install Dependencies](#install-dependencies)
     - [Usage](#usage)
   - [Running in Development Mode](#running-in-development-mode)
+    - [Keyboard Shortcuts](#keyboard-shortcuts)
+  - [Global Shortcut: Ctrl+Shift+S (Windows/Linux) or Command+Shift+S (macOS)](#global-shortcut-ctrlshifts-windowslinux-or-commandshifts-macos)
     - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
 
@@ -46,12 +48,14 @@
 
 ```bash
 git clone https://github.com/oguzhankalelioglu/voicegenai.git
-cd voicegenai
+cd voicegenai 
+```
 
 ### Install Dependencies
 Using npm:
 ```bash
 npm install
+```
 
 ### Usage
 ## Running in Development Mode
@@ -60,9 +64,10 @@ To start the application in development mode with hot-reloading:
 Using npm:
 ```bash
 npm start
+```
 
-Keyboard Shortcuts
-Global Shortcut: Ctrl+Shift+S (Windows/Linux) or Command+Shift+S (macOS)
+### Keyboard Shortcuts
+## Global Shortcut: Ctrl+Shift+S (Windows/Linux) or Command+Shift+S (macOS)
 Function: Brings the VoiceGenAI window to the foreground and converts the current clipboard text to speech.
 System Tray Menu
 Right-click the VoiceGenAI icon in your system tray to access the following options:
@@ -76,3 +81,4 @@ Quit: Exits the application.
 VoiceGenAI utilizes environment variables to manage sensitive information such as API keys. Create a .env file in the root directory and add the following:
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
+```
