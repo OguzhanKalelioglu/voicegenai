@@ -82,3 +82,12 @@ VoiceGenAI utilizes environment variables to manage sensitive information such a
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
 ```
+
+## Web Version
+To run the web-based version of VoiceGenAI, use the provided Express server:
+
+```bash
+npm run start-web
+```
+
+Then open `http://localhost:3000/web.html` in your browser.
