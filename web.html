@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoiceGenAI Web</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding-top: 40px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .title {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #text-input {
+      height: 150px;
+      resize: none;
+    }
+    #error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">VoiceGenAI Web</h1>
+
+    <div class="mb-3">
+      <label for="text-input" class="form-label">Metin Girişi</label>
+      <textarea class="form-control" id="text-input" placeholder="Metni buraya yapıştırın..."></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="voice-select" class="form-label">Ses Seçimi</label>
+      <select class="form-select" id="voice-select">
+        <option value="alloy">Alloy</option>
+        <option value="echo">Echo</option>
+        <option value="fable">Fable</option>
+      </select>
+    </div>
+
+    <button id="play-pause-button" class="btn btn-primary">Oynat</button>
+    <span id="token-usage" class="ms-2 text-muted"></span>
+    <div id="error-message"></div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="web.js"></script>
+</body>
+</html>
