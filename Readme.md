@@ -1,93 +1,60 @@
 # VoiceGenAI
 
-![VoiceGenAI Logo](./banner.jpg)
+VoiceGenAI is a text-to-speech application powered by OpenAI's AI models. It allows users to convert written text into natural-sounding audio. The application is available as a desktop app built with Electron and also includes a web server component.
 
-**VoiceGenAI** is a cutting-edge Text-to-Speech (TTS) application powered by Artificial Intelligence. Built with Electron, VoiceGenAI seamlessly converts written text into natural-sounding speech, enhancing accessibility and productivity across various platforms.
+## Core Features
 
-## Table of Contents
+*   **Text-to-Speech Conversion:** Enter or paste text into the application to generate speech.
+*   **Voice Selection:** Choose from a variety of available voices provided by OpenAI.
+*   **Audio Playback:** Listen to the generated audio directly within the application.
+*   **Clipboard Integration:** Automatically read text from the clipboard and convert it to speech.
+*   **Global Keyboard Shortcut:** Use `CmdOrControl+Shift+S` to quickly speak the text currently in the clipboard.
+*   **System Tray Icon:** Access application functionalities like clipboard reading and showing the app window directly from the system tray.
+*   **Web Interface:** A simple web interface (`web.html`) is available, powered by a local Express.js server, offering similar TTS functionality.
 
-- [VoiceGenAI](#voicegenai)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Demo](#demo)
-  - [Installation](#installation)
-    - [Prerequisites](#prerequisites)
-    - [Clone the Repository](#clone-the-repository)
-    - [Install Dependencies](#install-dependencies)
-    - [Usage](#usage)
-  - [Running in Development Mode](#running-in-development-mode)
-    - [Keyboard Shortcuts](#keyboard-shortcuts)
-  - [Global Shortcut: Ctrl+Shift+S (Windows/Linux) or Command+Shift+S (macOS)](#global-shortcut-ctrlshifts-windowslinux-or-commandshifts-macos)
-    - [Configuration](#configuration)
-  - [Environment Variables](#environment-variables)
+## Technologies Used
 
-## Features
+*   **Electron:** For building the cross-platform desktop application.
+*   **OpenAI API:** Utilizes the `tts-1-hd` model for high-quality speech synthesis.
+*   **Node.js:** As the runtime environment for Electron's main process and the backend server.
+*   **Express.js:** For the web server component that handles API requests for the web interface.
+*   **HTML, CSS, JavaScript:** For the application's user interface.
+*   **Bootstrap:** For styling the user interface.
 
-- **AI-Powered Speech Synthesis**: Leverages advanced AI models to generate high-quality, natural-sounding speech from text.
-- **Global Keyboard Shortcuts**: Easily access the application and convert clipboard text to speech using customizable shortcuts.
-- **System Tray Integration**: Access and control VoiceGenAI directly from your system tray with a user-friendly context menu.
-- **Cross-Platform Support**: Available for Windows, macOS, and Linux, ensuring a consistent experience across all major operating systems.
-- **Clipboard Monitoring**: Automatically reads and converts text from your clipboard, streamlining your workflow.
-- **Customizable Voices**: Choose from a variety of AI-generated voices to suit your preferences and needs.
-- **Lightweight and Efficient**: Designed to consume minimal system resources while delivering optimal performance.
+## How to Run
 
-## Demo
+### Desktop Application
 
-![VoiceGenAI in Action](./screenshots/demo.gif)
+1.  Ensure you have Node.js and npm installed.
+2.  Clone the repository.
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
+4.  Set up your OpenAI API Key:
+    *   Create a `.env` file in the root of the project.
+    *   Add your API key to the `.env` file like this:
+        ```
+        OPENAI_API_KEY=your_openai_api_key_here
+        ```
+5.  Start the application:
+    ```bash
+    npm start
+    ```
 
-*VoiceGenAI seamlessly converts clipboard text to speech with a simple keyboard shortcut.*
+### Web Server
 
-## Installation
+1.  Follow steps 1-4 from the Desktop Application setup.
+2.  Start the web server:
+    ```bash
+    npm run start-web
+    ```
+3.  Open your browser and navigate to `http://localhost:3000` (or the port specified in your environment if different) to access `web.html`.
 
-### Prerequisites
+## Author
 
-- **Node.js** (v14 or later)
-- **npm** (v6 or later) or **Yarn**
+Oğuzhan Kalelioğlu
 
-### Clone the Repository
+## License
 
-```bash
-git clone https://github.com/oguzhankalelioglu/voicegenai.git
-cd voicegenai 
-```
-
-### Install Dependencies
-Using npm:
-```bash
-npm install
-```
-
-### Usage
-## Running in Development Mode
-To start the application in development mode with hot-reloading:
-
-Using npm:
-```bash
-npm start
-```
-
-### Keyboard Shortcuts
-## Global Shortcut: Ctrl+Shift+S (Windows/Linux) or Command+Shift+S (macOS)
-Function: Brings the VoiceGenAI window to the foreground and converts the current clipboard text to speech.
-System Tray Menu
-Right-click the VoiceGenAI icon in your system tray to access the following options:
-
-Read Clipboard: Converts the current clipboard text to speech.
-Show Application: Brings the VoiceGenAI window to the foreground.
-Quit: Exits the application.
-
-### Configuration
-## Environment Variables
-VoiceGenAI utilizes environment variables to manage sensitive information such as API keys. Create a .env file in the root directory and add the following:
-```bash
-OPENAI_API_KEY=your_openai_api_key_here
-```
-
-## Web Version
-To run the web-based version of VoiceGenAI, use the provided Express server:
-
-```bash
-npm run start-web
-```
-
-Then open `http://localhost:3000/web.html` in your browser.
+MIT
